@@ -3,7 +3,6 @@
 // Released under the GNU GPLv2 or any later version
 using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SaltwaterTaffy.Container;
 
 namespace SaltwaterTaffy.Test
 {

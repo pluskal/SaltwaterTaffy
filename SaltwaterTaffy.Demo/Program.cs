@@ -3,7 +3,6 @@
 // Released under the GNU GPLv2 or any later version
 using System;
 using System.Linq;
-using SaltwaterTaffy.Container;
 
 namespace SaltwaterTaffy.Demo
 {
@@ -11,35 +10,42 @@ namespace SaltwaterTaffy.Demo
     {
         private static void Main(string[] args)
         {
-            Console.Write("Enter an IP or subnet: ");
-            var target = new Target(Console.ReadLine().Trim());
+            Console.Write($"Starting ARP: {DateTime.Now}");
+            var target = new Target("192.168.1.0/24");
             Console.WriteLine("Initializing scan of {0}", target);
-            ScanResult result = new Scanner(target).PortScan();
-            Console.WriteLine("Detected {0} host(s), {1} up and {2} down.", result.Total, result.Up, result.Down);
-            foreach (Host i in result.Hosts)
+            var result = new Scanner(target).HostDiscoveryArp();
+            Console.Write($"Finished ARP: {DateTime.Now}");
+
+            Console.WriteLine($"Hosts:");
+            foreach (var host in result)
             {
-                Console.WriteLine("Host: {0}", i.Address);
-                foreach (Port j in i.Ports)
-                {
-                    Console.Write("\tport {0}", j.PortNumber);
-                    if (!string.IsNullOrEmpty(j.Service.Name))
-                    {
-                        Console.Write(" is running {0}", j.Service.Name);
-                    }
-
-                    if (j.Filtered)
-                    {
-                        Console.Write(" is filtered");
-                    }
-
-                    Console.WriteLine();
-                }
-
-                if (i.OsMatches.Any())
-                {
-                    Console.WriteLine("and is probably running {0}", i.OsMatches.First().Name);
-                }
+                Console.WriteLine($"{host.Address}");
             }
+            //Console.WriteLine("Detected {0} host(s), {1} up and {2} down.", result.Total, result.Up, result.Down);
+            //foreach (Host i in result.Hosts)
+            //{
+            //    Console.WriteLine("Host: {0}", i.Address);
+            //    foreach (Port j in i.Ports)
+            //    {
+            //        Console.Write("\tport {0}", j.PortNumber);
+            //        if (!string.IsNullOrEmpty(j.Service.Name))
+            //        {
+            //            Console.Write(" is running {0}", j.Service.Name);
+            //        }
+
+            //        if (j.Filtered)
+            //        {
+            //            Console.Write(" is filtered");
+            //        }
+
+            //        Console.WriteLine();
+            //    }
+
+            //    if (i.OsMatches.Any())
+            //    {
+            //        Console.WriteLine("and is probably running {0}", i.OsMatches.First().Name);
+            //    }
+            //}
 
             Console.Read();
         }

@@ -4,7 +4,6 @@
 using System.Linq;
 using System.Net.Sockets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SaltwaterTaffy.Container;
 using Simple.DotNMap;
 
 namespace SaltwaterTaffy.Test

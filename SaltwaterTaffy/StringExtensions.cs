@@ -1,7 +1,7 @@
 ﻿// This file is part of SaltwaterTaffy, an nmap wrapper library for .NET
 // Copyright (C) 2013 Thom Dixon <thom@thomdixon.org>
 // Released under the GNU GPLv2 or any later version
-namespace SaltwaterTaffy.Utility
+namespace SaltwaterTaffy
 {
     public static class StringExtensions
     {
