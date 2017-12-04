@@ -11,7 +11,7 @@ namespace SaltwaterTaffy.Demo
         private static void Main(string[] args)
         {
             Console.Write($"Starting ARP: {DateTime.Now}");
-            var target = new Target("192.168.1.0/24");
+            var target = new Target("10.0.0.0/30");
             Console.WriteLine("Initializing scan of {0}", target);
             var result = new Scanner(target).HostDiscoveryArp();
             Console.Write($"Finished ARP: {DateTime.Now}");

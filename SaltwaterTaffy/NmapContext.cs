@@ -49,6 +49,8 @@ namespace SaltwaterTaffy
         private static string LocateExecutable(string filename)
         {
             string path = Environment.GetEnvironmentVariable("path");
+			if (path == null)
+				return "nmap";
             string[] folders = path.Split(';');
 
             foreach (string folder in folders)
@@ -60,7 +62,7 @@ namespace SaltwaterTaffy
                 }
             }
 
-            return string.Empty;
+            return "nmap";
         }
 
         /// <summary>
@@ -83,10 +85,10 @@ namespace SaltwaterTaffy
                 throw new ApplicationException("Nmap output file path is null or empty");
             }
 
-            if (string.IsNullOrEmpty(this.Path) || !File.Exists(this.Path))
-            {
-                throw new ApplicationException("Path to nmap is invalid");
-            }
+            //if (string.IsNullOrEmpty(this.Path) || !File.Exists(this.Path))
+            //{
+            //    throw new ApplicationException("Path to nmap is invalid");
+            //}
 
             if (string.IsNullOrEmpty(this.Target))
             {
