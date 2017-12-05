@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace SaltwaterTaffy
@@ -15,7 +16,13 @@ namespace SaltwaterTaffy
         public IEnumerable<Os> OsMatches { get; set; }
         public override string ToString()
         {
-            return $"Address: {this.Address}, {string.Join(",",this.Ports)}";
+            var sb = new System.Text.StringBuilder();
+            sb.Append($"Address: {this.Address}");
+            if (this.Hostnames != null && this.Hostnames.Any()) { sb.Append($", {string.Join(",", this.Hostnames)}"); }
+			if (this.Ports != null && this.Ports.Any()) { sb.Append($", {string.Join(",", this.Ports)}"); }
+			if (this.ExtraPorts != null && this.ExtraPorts.Any()) { sb.Append($", {string.Join(",", this.ExtraPorts)}"); }
+			if (this.OsMatches != null && this.OsMatches.Any()) { sb.Append($", {string.Join(",", this.OsMatches)}"); }
+            return sb.ToString();
         }
     }
 }
