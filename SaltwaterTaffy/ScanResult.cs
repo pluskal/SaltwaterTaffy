@@ -66,7 +66,8 @@ namespace SaltwaterTaffy
                                     ? x.protocol.ToString().ToUpperInvariant()
                                     : x.protocol.ToString().Capitalize())
                             : ProtocolType.Unknown,
-                        Filtered = x.state.state1 == "filtered",
+                        Filtered = x.state.state1.Contains("filtered"),
+                        Closed = x.state.state1.Contains("closed"),
                         Service = x.service != null
                             ? new Service
                             {

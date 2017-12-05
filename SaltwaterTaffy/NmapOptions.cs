@@ -258,39 +258,39 @@ namespace SaltwaterTaffy
 
         public NmapOptions()
         {
-            _nmapOptions = new Dictionary<string, string>();
+            this._nmapOptions = new Dictionary<string, string>();
         }
 
         public void Add(KeyValuePair<NmapFlag, string> kvp)
         {
-            Add(kvp.Key, kvp.Value);
+            this.Add(kvp.Key, kvp.Value);
         }
 
         public void Clear()
         {
-            _nmapOptions.Clear();
+            this._nmapOptions.Clear();
         }
 
         public bool Contains(KeyValuePair<NmapFlag, string> item)
         {
-            return _nmapOptions.Contains(new KeyValuePair<string, string>(_nmapFlagToOption[item.Key], item.Value));
+            return this._nmapOptions.Contains(new KeyValuePair<string, string>(this._nmapFlagToOption[item.Key], item.Value));
         }
 
         public void CopyTo(KeyValuePair<NmapFlag, string>[] array, int arrayIndex)
         {
-            _nmapOptions.Select(x => new KeyValuePair<NmapFlag, string>(_nmapOptionToFlag[x.Key], x.Value))
+            this._nmapOptions.Select(x => new KeyValuePair<NmapFlag, string>(this._nmapOptionToFlag[x.Key], x.Value))
                         .ToArray()
                         .CopyTo(array, arrayIndex);
         }
 
         public bool Remove(KeyValuePair<NmapFlag, string> item)
         {
-            return _nmapOptions.Remove(_nmapFlagToOption[item.Key]);
+            return this._nmapOptions.Remove(this._nmapFlagToOption[item.Key]);
         }
 
         public int Count
         {
-            get { return _nmapOptions.Count; }
+            get { return this._nmapOptions.Count; }
         }
 
         public bool IsReadOnly
@@ -300,72 +300,71 @@ namespace SaltwaterTaffy
 
         public bool ContainsKey(NmapFlag key)
         {
-            return _nmapOptions.ContainsKey(_nmapFlagToOption[key]);
+            return this._nmapOptions.ContainsKey(this._nmapFlagToOption[key]);
         }
 
         public void Add(NmapFlag flag, string argument)
         {
-            string option = _nmapFlagToOption[flag];
+            string option = this._nmapFlagToOption[flag];
 
-            if (_nmapOptions.ContainsKey(option))
+            if (this._nmapOptions.ContainsKey(option))
             {
-                _nmapOptions[option] = string.Format("{0},{1}", _nmapOptions[option], argument);
+                this._nmapOptions[option] = string.Format("{0},{1}", this._nmapOptions[option], argument);
             }
             else
             {
-                _nmapOptions.Add(option, argument);
+                this._nmapOptions.Add(option, argument);
             }
         }
 
         public bool Remove(NmapFlag key)
         {
-            return _nmapOptions.Remove(_nmapFlagToOption[key]);
+            return this._nmapOptions.Remove(this._nmapFlagToOption[key]);
         }
 
         public bool TryGetValue(NmapFlag key, out string value)
         {
-            return _nmapOptions.TryGetValue(_nmapFlagToOption[key], out value);
+            return this._nmapOptions.TryGetValue(this._nmapFlagToOption[key], out value);
         }
 
         public string this[NmapFlag key]
         {
-            get { return _nmapOptions[_nmapFlagToOption[key]]; }
-            set { _nmapOptions[_nmapFlagToOption[key]] = value; }
+            get { return this._nmapOptions[this._nmapFlagToOption[key]]; }
+            set { this._nmapOptions[this._nmapFlagToOption[key]] = value; }
         }
 
         public ICollection<NmapFlag> Keys
         {
-            get { return _nmapOptions.Select(x => _nmapOptionToFlag[x.Key]).ToArray(); }
+            get { return this._nmapOptions.Select(x => this._nmapOptionToFlag[x.Key]).ToArray(); }
         }
 
         public ICollection<string> Values
         {
-            get { return _nmapOptions.Values; }
+            get { return this._nmapOptions.Values; }
         }
 
 
         public IEnumerator<KeyValuePair<NmapFlag, string>> GetEnumerator()
         {
-            return
-                _nmapOptions.Select(x => new KeyValuePair<NmapFlag, string>(_nmapOptionToFlag[x.Key], x.Value))
+            return this._nmapOptions.Select(x => new KeyValuePair<NmapFlag, string>(this._nmapOptionToFlag[x.Key], x.Value))
                             .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public void Add(NmapFlag flag)
         {
-            Add(flag, string.Empty);
+            this.Add(flag, string.Empty);
         }
 
         public void AddAll(IEnumerable<NmapFlag> flags)
         {
             foreach (NmapFlag flag in flags)
             {
-                Add(flag);
+                this.Add(flag);
             }
         }
 
@@ -373,14 +372,13 @@ namespace SaltwaterTaffy
         {
             foreach (var kvp in kvps)
             {
-                Add(kvp.Key, kvp.Value);
+                this.Add(kvp.Key, kvp.Value);
             }
         }
 
         public override string ToString()
         {
-            return
-                _nmapOptions.Aggregate(new StringBuilder(), (sb, kvp) => sb.AppendFormat("{0} {1} ", kvp.Key, kvp.Value),
+            return this._nmapOptions.Aggregate(new StringBuilder(), (sb, kvp) => sb.AppendFormat("{0} {1} ", kvp.Key, kvp.Value),
                                        sb => sb.ToString()).Trim();
         }
     }

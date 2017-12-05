@@ -13,5 +13,9 @@ namespace SaltwaterTaffy
         public IEnumerable<Port> Ports { get; set; }
         public IEnumerable<ExtraPorts> ExtraPorts { get; set; }
         public IEnumerable<Os> OsMatches { get; set; }
+        public override string ToString()
+        {
+            return $"Address: {this.Address}, {string.Join(",",this.Ports)}";
+        }
     }
 }
